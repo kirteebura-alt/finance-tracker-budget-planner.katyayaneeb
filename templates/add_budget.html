@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Budget</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>Menu</h2>
+
+        <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+        <a href="{{ url_for('charts') }}">📊 Charts</a>
+        <a href="{{ url_for('prediction') }}">🔮 Prediction</a>
+        <a href="{{ url_for('add_budget') }}" class="active">💼 Budgets</a>
+        <a href="{{ url_for('assistant') }}">🤖 AI Assistant</a>
+        <a href="{{ url_for('export_csv') }}">📄 CSV</a>
+        <a href="{{ url_for('export_pdf') }}">📑 PDF</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h1>💼 Budget Planner</h1>
+                <p>Create monthly spending limits</p>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>➕ Add New Budget</h2>
+
+            <form method="POST">
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    name="category"
+                    placeholder="Example: Food"
+                    required>
+
+                <label>Monthly Limit (₹)</label>
+
+                <input
+                    type="number"
+                    name="monthly_limit"
+                    placeholder="5000"
+                    required>
+
+                <button class="add-btn" type="submit">
+                    💾 Save Budget
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

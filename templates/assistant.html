@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="sidebar">
+
+        <h2>Menu</h2>
+
+        <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+
+        <a href="{{ url_for('charts') }}">📊 Charts</a>
+
+        <a href="{{ url_for('prediction') }}">🔮 Prediction</a>
+
+        <a href="{{ url_for('add_budget') }}">💼 Budgets</a>
+
+        <a href="{{ url_for('assistant') }}" class="active">🤖 AI Assistant</a>
+
+        <a href="{{ url_for('export_csv') }}">📄 CSV</a>
+
+        <a href="{{ url_for('export_pdf') }}">📑 PDF</a>
+        
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+    </div>
+
+    <div class="main-content">
+
+        <div class="topbar">
+            <div>
+                <h1>🤖 AI Financial Assistant</h1>
+                <p>Ask questions about your finances</p>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>💬 Ask a Question</h2>
+
+            <form method="POST">
+
+                <input
+                    type="text"
+                    name="question"
+                    placeholder="Example: How can I save money?"
+                    required>
+
+                <button type="submit">
+                    Ask AI
+                </button>
+
+            </form>
+
+            {% if response %}
+                <div class="alert">
+            {{ response }}
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

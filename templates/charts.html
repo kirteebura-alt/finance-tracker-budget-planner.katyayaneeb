@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Charts</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>Menu</h2>
+
+        <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+
+        <a href="{{ url_for('charts') }}" class="active">
+            📊 Charts
+        </a>
+
+        <a href="{{ url_for('prediction') }}">🔮 Prediction</a>
+
+        <a href="{{ url_for('add_budget') }}">💼 Budgets</a>
+        
+        <a href="{{ url_for('assistant') }}">🤖 AI Assistant</a>
+
+        <a href="{{ url_for('export_csv') }}">📄 CSV</a>
+
+        <a href="{{ url_for('export_pdf') }}">📑 PDF</a>
+
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h1>📊 Financial Charts</h1>
+                <p>Visualize your income and expenses</p>
+            </div>
+
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="card">
+
+            <h2>🪙 Income vs Expense</h2>
+            <div class="chart-container">
+            <canvas id="incomeExpenseChart"></canvas>
+            <script>
+const incomeCtx = document.getElementById("incomeExpenseChart");
+
+new Chart(incomeCtx, {
+    type: "bar",
+    data: {
+        labels: ["Income", "Expense"],
+        datasets: [{
+            label: "Amount (₹)",
+            data: [{{ income }}, {{ expense }}],
+            backgroundColor: [
+                "#22c55e",
+                "#ef4444"
+            ],
+            borderRadius: 8
+        }]
+    },
+        options:{
+        responsive:true,
+        maintainAspectRatio:false
+    }
+});
+</script>
+    </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="card">
+
+            <h2>📉 Category Wise Expenses</h2>
+            <div class="pie-container">
+            <canvas id="categoryChart"></canvas>
+            <script>
+const categoryCtx = document.getElementById("categoryChart");
+
+new Chart(categoryCtx, {
+    type: "pie",
+    data: {
+        labels: {{ labels|tojson }},
+        datasets: [{
+            data: {{ values|tojson }},
+            backgroundColor: [
+                "#2563eb",
+                "#22c55e",
+                "#ef4444",
+                "#f59e0b",
+                "#8b5cf6",
+                "#14b8a6",
+                "#ec4899"
+            ]
+        }]
+    },
+    options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+        legend:{
+            display:false
+        }
+    }
+}
+});
+</script>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

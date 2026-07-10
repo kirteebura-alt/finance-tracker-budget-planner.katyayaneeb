@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Transaction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <h2>Menu</h2>
+
+        <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+        <a href="{{ url_for('charts') }}">📊 Charts</a>
+        <a href="{{ url_for('prediction') }}">🔮 Prediction</a>
+        <a href="{{ url_for('add_budget') }}">💼 Budgets</a>
+        <a href="{{ url_for('assistant') }}">🤖 AI Assistant</a>
+        <a href="{{ url_for('export_csv') }}">📄 CSV</a>
+        <a href="{{ url_for('export_pdf') }}">📑 PDF</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <div class="topbar">
+
+            <div>
+                <h1>💳 Add Transaction</h1>
+                <p>Record your income and expenses</p>
+            </div>
+
+        </div>
+
+    <div class="card">
+
+    <h2>📋 Add Transaction Details</h2>
+
+    <form method="POST">
+
+        <div class="form-grid">
+
+            <!-- Category -->
+            <div class="form-group">
+                <label>📁 Category</label>
+                <input type="text"
+                       name="category"
+                       placeholder="Food, Salary, Shopping..."
+                       required>
+            </div>
+
+            <!-- Amount -->
+            <div class="form-group">
+                <label>💰 Amount (₹)</label>
+                <input type="number"
+                       name="amount"
+                       step="0.01"
+                       placeholder="Enter amount"
+                       required>
+            </div>
+
+            <!-- Type -->
+            <div class="form-group">
+                <label>📌 Type</label>
+                <select name="transaction_type">
+                    <option value="income">💰 Income</option>
+                    <option value="expense">💸 Expense</option>
+                </select>
+            </div>
+
+            <!-- Recurring -->
+            <div class="form-group">
+                <label>🔄 Recurring</label>
+                <select name="recurring">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- Notes -->
+            <div class="form-group full-width">
+                <label>📝 Notes</label>
+                <input type="text"
+                       name="notes"
+                       placeholder="Optional notes">
+            </div>
+
+        </div>
+        </div>
+
+        <div class="btn-center">
+            <button type="submit" class="save-btn">
+                💾 Save Transaction
+            </button>
+
+    </form>
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spending Prediction</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+
+    <div class="sidebar">
+        <h2>Menu</h2>
+
+        <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+
+        <a href="{{ url_for('charts') }}"> 📊 Charts </a>
+
+        <a href="{{ url_for('prediction') }}"class="active">🔮 Prediction</a>
+
+        <a href="{{ url_for('add_budget') }}">💼 Budgets</a>
+
+        <a href="{{ url_for('assistant') }}">🤖 AI Assistant</a>
+
+        <a href="{{ url_for('export_csv') }}">📄 CSV</a>
+
+        <a href="{{ url_for('export_pdf') }}">📑 PDF</a>
+
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+    </div>
+    <div class="main-content">
+    <div class="topbar">
+    <div>
+        <h1>🔮 Spending Prediction</h1>
+        <p>Estimate your future spending based on your transactions</p>
+    </div>
+
+    
+</div>
+
+<div class="card">
+
+    <h2>📈 Predicted Expense</h2>
+
+    <div class="summary">
+    <div class="summary-box expense">
+        <h3>Estimated Spending</h3>
+        <h2>₹{{ "%.2f"|format(predicted_expense or 0) }}</h2>
+        <p>Average future monthly expense</p>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

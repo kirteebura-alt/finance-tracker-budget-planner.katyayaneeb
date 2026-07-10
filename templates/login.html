@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div class="left-panel">
+    <img src="{{ url_for('static', filename='css/image.png') }}" alt="Finance">
+</div>
+
+<div class="right-panel">
+<div class="login-container">
+
+    <h2>💰 Budget Planner</h2><br><br>
+    <p class="subtitle">Manage Your Money Smarter</p>
+
+    <form method="POST" action="{{ url_for('login') }}">
+
+        <div class="input-group">
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                >
+        </div>
+
+        <div class="input-group">
+            <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+            >
+            <a href="#" class="forgot">
+            Forgot Password?
+        </a>
+        </div>
+        
+
+        <button type="submit" class="login-btn">Login</button>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="register-text">
+            <span>New to Budget Planner?</span>
+            <a href="{{ url_for('register') }}">Create Account</a>
+        </div>
+
+    </form>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            💰 <span>Finance Tracker & Budget Planner</span>
+        </div>
+
+        <div class="help-btn">Help</div>
+    </nav>
+    <section class="hero">
+
+        <div class="hero-text">
+            <h1>Take Control of Your <span>Finances</span> Today</h1>
+
+            <p>
+                Track expenses, manage budgets and achieve your
+                financial goals with ease.
+            </p>
+
+            <div class="buttons">
+                <a href="{{ url_for('login') }}" class="btn login-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120v-80h280v-560H480v-80h280q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/></svg>Login</a>
+                <a href="{{ url_for('register') }}" class="btn register-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2d6df6"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>Create Account</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='css/image2.png') }}"
+                 alt="Budget Planner">
+        </div>
+
+    </section>
+
+</body>
+</html>
+```

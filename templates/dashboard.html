@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard">
+        <div class="sidebar">
+
+    <h2>Menu</h2>
+
+    <a href="{{ url_for('dashboard') }}" class="active"> 🏠 Dashboard</a>
+
+    <a href="{{ url_for('charts') }}">📊 Charts</a>
+
+    <a href="{{ url_for('prediction') }}">🔮 Prediction</a>
+
+    <a href="{{ url_for('add_budget') }}">💼 Budgets</a>
+
+    <a href="{{ url_for('assistant') }}">🤖 AI Assistant</a>
+
+    <a href="{{ url_for('export_csv') }}">📄 CSV</a>
+
+    <a href="{{ url_for('export_pdf') }}">📑 PDF</a>
+
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+<div class="main-content">
+    <div class="card">
+
+    <h1>💰 Personal Finance Tracker</h1>
+
+    <p>
+        Welcome back,
+        <strong>{{ current_user.username }}</strong> 👋
+    </p>
+</div>
+
+    <div class="summary">
+
+    <div class="summary-box income">
+        <h3>💰 Income</h3>
+        <h2>₹{{ total_income }}</h2>
+    </div>
+
+    <div class="summary-box expense">
+        <h3>💸 Expenses</h3>
+        <h2>₹{{ total_expense }}</h2>
+    </div>
+
+    <div class="summary-box balance">
+        <h3>🏦 Balance</h3>
+        <h2>₹{{ balance }}</h2>
+    </div>
+
+</div>
+
+<div class="summary">
+
+    <div class="summary-box">
+        <h3>📄 Transactions</h3>
+        <h2>{{ total_transactions }}</h2>
+    </div>
+
+    <div class="summary-box">
+        <h3>💼 Budgets</h3>
+        <h2>{{ total_budgets }}</h2>
+    </div>
+
+    <div class="summary-box">
+        <h3>🔄 Recurring</h3>
+        <h2>{{ recurring_transactions }}</h2>
+    </div>
+
+</div>
+    
+<div class="card" id="budgets">
+    
+<h2>Your Budgets</h2>
+
+{% if budgets %}
+
+<table class="styled-table">
+    <tr>
+        <th>📂 Category</th>
+        <th>💰 Monthly Limit</th>
+        <th>⚙ Action</th>
+    </tr>
+
+    {% for budget in budgets %}
+    <tr>
+        <td>{{ budget.category }}</td>
+        <td>₹{{ budget.monthly_limit }}</td>
+    
+        <td class="action-cell">
+            <a href="{{ url_for('edit_budget', id=budget.id) }}"
+                class="action-btn edit-btn">
+                ✏️Edit
+            </a>
+
+            <a href="{{ url_for('delete_budget', id=budget.id) }}"
+                class="action-btn delete-btn">
+               🗑️ Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+
+<p>No budgets added yet.</p>
+
+{% endif %}
+
+
+{% for alert in alerts %}
+<div class="alert">
+    ⚠️ {{ alert }}
+</div>
+{% endfor %}
+
+
+    <a class="add-btn"
+         href="{{ url_for('add_budget') }}">
+        💼 Add Budget
+    </a>
+</div>
+
+<div class="card"> 
+<h2>Filter Transactions</h2>
+
+<form method="GET" action="{{ url_for('dashboard') }}">
+
+    <select name="category">
+        <option value="">All Categories</option>
+
+        {% for category in categories %}
+            <option value="{{ category }}">
+                {{ category }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">
+        Filter
+    </button>
+
+</form>
+
+    <h2>Your Transactions</h2>
+
+{% if transactions %}
+
+<table class="styled-table">
+
+    <tr>
+        <th>📂Category</th>
+        <th>💰Amount</th>
+        <th>📊Type</th>
+        <th>🔄Recurring</th>
+        <th>📝Notes</th>
+        <th class="action-column">⚙Action</th>
+    </tr>
+
+    {% for transaction in transactions %}
+
+    <tr>
+
+        <td>{{ transaction.category }}</td>
+
+        <td>₹{{ transaction.amount }}</td>
+
+        <td>{% if transaction.transaction_type == "income" %}
+            <span class="income-text">Income</span>
+            {% else %}
+            <span class="expense-text">Expense</span>
+            {% endif %}
+        </td>
+
+        <td>
+            {% if transaction.is_recurring %}
+                🔄 Yes
+            {% else %}
+                No
+            {% endif %}
+        </td>
+
+        <td>
+            {{ transaction.notes }}
+        </td>
+
+            <td class="action-column">
+                <a href="{{ url_for('edit_transaction', id=transaction.id) }}"
+                    class="action-btn edit-btn">
+                    ✏️Edit
+                </a>
+
+                <a href="{{ url_for('delete_transaction', id=transaction.id) }}"
+                    class="action-btn delete-btn">
+                     🗑️Delete
+                </a>
+            </td>
+
+    </tr>
+
+    {% endfor %}
+
+
+</table>
+<a class="add-btn"
+        href="{{ url_for('add_transaction') }}">
+        ➕ Add transaction
+    </a>
+
+{% else %}
+
+<p>No transactions yet.</p>
+
+{% endif %}
+</div>
+</div>
+</div>
+</body>
+</html>
