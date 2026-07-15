@@ -18,6 +18,15 @@
     <h2>💰 Budget Planner</h2><br><br>
     <p class="subtitle">Manage Your Money Smarter</p>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
     <form method="POST" action="{{ url_for('login') }}">
 
         <div class="input-group">

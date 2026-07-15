@@ -95,14 +95,15 @@ def login():
 
         user = User.query.filter_by(email=email).first()
 
-        if user and user.check_password(password):
-            login_user(user)
-            return redirect(url_for("dashboard"))
+        if not user or not user.check_password(password):
+            flash("Invalid email or password", "danger")
+            return render_template("login.html")
 
-        return "Invalid email or password"
+        login_user(user)
+        flash("Login successful!", "success")
+        return redirect(url_for("dashboard"))
 
     return render_template("login.html")
-
 
 @app.route("/dashboard")
 @login_required
